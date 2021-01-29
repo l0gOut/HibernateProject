@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ReleaseAuthors {
@@ -73,6 +74,13 @@ public class ReleaseAuthors {
                             return;
                         }
                         if (selectGenre.equals("A")){
+                            System.out.println("----------------------------------------------------------");
+                            List<Genres> genresList = serviceGenres.readAll();
+                            System.out.println("Id \t Genres");
+                            for (Genres genre: genresList) {
+                                System.out.println(genre.getId() + "\t" + genre.getGenreName());
+                            }
+                            System.out.println("----------------------------------------------------------");
                             System.out.println("Введите id существуещего в базе жанра: ");
                             books.setGenres(serviceGenres.read(Integer.valueOf(bf.readLine())));
                             Set<Authors> authorsSet = new HashSet<>();
@@ -89,6 +97,13 @@ public class ReleaseAuthors {
                     } while (true);
                 }
                 if (select.equals("A")) {
+                    System.out.println("----------------------------------------------------------");
+                    List<Books> booksList = serviceBooks.readAll();
+                    System.out.println("Id \t Titles \t Genres \t PublishingDate");
+                    for (Books book: booksList) {
+                        System.out.println(book.getId() + "\t" + book.getTitle() + "\t" + book.getGenres().getGenreName() + "\t" + book.getPublishingYear());
+                    }
+                    System.out.println("----------------------------------------------------------");
                     System.out.println("Введите id книги из базы");
                     Books books = serviceBooks.read(Integer.valueOf(bf.readLine()));
                     Set<Books> booksSet = new HashSet<>();
